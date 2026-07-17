@@ -125,7 +125,17 @@ sudo cp target/release/ferrite /usr/local/bin/ferrite</code></pre>
             </div>
             <div class="notes">
                 <div class="note">
-                    <strong>v0.1.5 — current</strong>
+                    <strong>v0.1.6 — current</strong>
+                    <p>
+                        Memory overhaul — the mimalloc allocator, bounded
+                        internal caches, and new memory-introspection stats keep
+                        long-running RSS low and flat. Tunnel supervision was
+                        hardened against stalls and reconnect churn, and the
+                        Docker image now exposes 443.
+                    </p>
+                </div>
+                <div class="note">
+                    <strong>v0.1.5</strong>
                     <p>
                         Transport-independent DNSSEC — signatures now survive
                         over DoT and plain upstreams by raw-forwarding the wire
