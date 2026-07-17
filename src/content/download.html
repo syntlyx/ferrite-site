@@ -1,0 +1,159 @@
+<main id="top">
+    <section class="band" id="install">
+        <div class="wrap install-grid">
+            <div>
+                <p class="eyebrow">Install</p>
+                <h1 class="display">
+                    One script, then point your network at it
+                </h1>
+                <p class="lead">
+                    The installer fetches the server and web UI release assets,
+                    prepares system paths, and sets up the service for systemd,
+                    OpenRC, or launchd. Prefer containers? Pull the image from
+                    GHCR.
+                </p>
+                <div class="commands">
+                    <div class="command ticks">
+                        <div class="command-head">
+                            <span>Linux / macOS release install</span>
+                            <button
+                                class="copy"
+                                data-copy="curl -fsSL https://raw.githubusercontent.com/syntlyx/ferrite-server/refs/heads/main/install.sh | sudo sh"
+                            >
+                                Copy
+                            </button>
+                        </div>
+                        <pre><code>curl -fsSL https://raw.githubusercontent.com/syntlyx/ferrite-server/refs/heads/main/install.sh | sudo sh</code></pre>
+                    </div>
+                    <div class="command">
+                        <div class="command-head">
+                            <span>Docker — ghcr.io</span>
+                            <button
+                                class="copy"
+                                data-copy="docker run -d --name ferrite \&#10;  --restart unless-stopped \&#10;  -p 53:53/tcp -p 53:53/udp \&#10;  -p 80:80/tcp \&#10;  -v ferrite-data:/var/lib/ferrite \&#10;  ghcr.io/syntlyx/ferrite-server:latest"
+                            >
+                                Copy
+                            </button>
+                        </div>
+                        <pre><code>docker run -d --name ferrite \
+  --restart unless-stopped \
+  -p 53:53/tcp -p 53:53/udp \
+  -p 80:80/tcp \
+  -v ferrite-data:/var/lib/ferrite \
+  ghcr.io/syntlyx/ferrite-server:latest</code></pre>
+                    </div>
+                    <div class="command">
+                        <div class="command-head">
+                            <span>Build from source</span>
+                            <button
+                                class="copy"
+                                data-copy="cargo build --release&#10;sudo cp target/release/ferrite /usr/local/bin/ferrite"
+                            >
+                                Copy
+                            </button>
+                        </div>
+                        <pre><code>cargo build --release
+sudo cp target/release/ferrite /usr/local/bin/ferrite</code></pre>
+                    </div>
+                    <div class="command">
+                        <div class="command-head">
+                            <span>Set a web UI password</span>
+                            <button class="copy" data-copy="ferrite passwd">
+                                Copy
+                            </button>
+                        </div>
+                        <pre><code>ferrite passwd</code></pre>
+                    </div>
+                </div>
+            </div>
+            <div class="notes">
+                <div class="note">
+                    <strong>Default panel shortcut</strong>
+                    <p>
+                        Ferrite serves a built-in <code>fe.te</code> record that
+                        points to the detected local server address, so the
+                        panel is easy to find on the LAN.
+                    </p>
+                </div>
+                <div class="note">
+                    <strong>Container image on GHCR</strong>
+                    <p>
+                        A small Alpine image is published to
+                        <code>ghcr.io/syntlyx/ferrite-server</code>. Mount
+                        <code>/var/lib/ferrite</code> so config, data, and
+                        updates survive restarts — an Unraid Community Apps
+                        template is available too.
+                    </p>
+                </div>
+                <div class="note">
+                    <strong>No root for tunnels</strong>
+                    <p>
+                        WireGuard egress runs in userspace (boringtun + smoltcp)
+                        — no TUN device and no <code>CAP_NET_ADMIN</code>.
+                        Privileged ports (53/80) just need the usual bind
+                        capability.
+                    </p>
+                </div>
+                <div class="note">
+                    <strong>Runtime-managed updates</strong>
+                    <p>
+                        The web UI updates through
+                        <code>POST /api/update/web</code>, and the server
+                        self-updates from GitHub releases — once Ferrite is
+                        running.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="band alt" id="releases">
+        <div class="wrap">
+            <div class="section-head">
+                <p class="eyebrow">Releases</p>
+                <h2 class="display">What's new</h2>
+                <p class="lead">
+                    Source and tagged releases live on GitHub:
+                    <a href="https://github.com/syntlyx/ferrite-server"
+                        >ferrite-server</a
+                    >
+                    and
+                    <a href="https://github.com/syntlyx/ferrite-web"
+                        >ferrite-web</a
+                    >.
+                </p>
+            </div>
+            <div class="notes">
+                <div class="note">
+                    <strong>v0.1.5 — current</strong>
+                    <p>
+                        Transport-independent DNSSEC — signatures now survive
+                        over DoT and plain upstreams by raw-forwarding the wire
+                        response instead of rebuilding the query. Idle tunnel
+                        connections are reaped on a timeout, so memory stays
+                        flat under heavy per-device routing.
+                    </p>
+                </div>
+                <div class="note">
+                    <strong>v0.1.4</strong>
+                    <p>
+                        Per-device routing rules, upstream-through-tunnel
+                        (DNS-over-TCP + DoT), DPI-evasion egress, unified :80
+                        (panel + proxy), DNSSEC request + ECS stripping,
+                        diagnostic Tools (nslookup/WHOIS), block-source
+                        attribution, and a debug-logging toggle.
+                    </p>
+                </div>
+                <div class="note">
+                    <strong>Earlier</strong>
+                    <p>
+                        Selective routing engine, userspace WireGuard / SOCKS5
+                        egress, encrypted upstreams (DoH/DoT/DoQ), compiled
+                        blocklists, custom DNS, live stats, and the REST-managed
+                        web UI.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

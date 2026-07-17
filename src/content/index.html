@@ -1,0 +1,717 @@
+<main id="top">
+    <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-inner">
+            <div class="hero-copy">
+                <p class="hero-kicker">
+                    <span class="pulse" aria-hidden="true"></span>
+                    DNS filtering + per-device tunneling · forged in Rust
+                </p>
+                <h1 id="hero-title" class="display">
+                    Burn the ads.<br />Tunnel the<br /><span class="ember"
+                        >rest</span
+                    >
+                </h1>
+                <p class="hero-sub">
+                    Ferrite blocks ads and trackers like a sinkhole — then goes
+                    further: route chosen domains, or whole devices, through
+                    <strong>WireGuard, SOCKS5, or Tor</strong> with DPI evasion
+                    and encrypted upstreams. Filtering and a privacy tunnel in
+                    one no-root binary.
+                </p>
+                <div class="hero-actions">
+                    <a class="button button-primary" href="#install">
+                        <svg
+                            aria-hidden="true"
+                            width="15"
+                            height="15"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2.4"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <path
+                                d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"
+                            ></path>
+                            <path d="M7 10l5 5 5-5"></path>
+                            <path d="M12 15V3"></path>
+                        </svg>
+                        Install Ferrite
+                    </a>
+                    <a
+                        class="button button-ghost"
+                        href="https://github.com/syntlyx/ferrite-server"
+                    >
+                        <svg
+                            aria-hidden="true"
+                            width="15"
+                            height="15"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2.2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <path
+                                d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.4 5.4 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"
+                            ></path>
+                            <path d="M9 18c-4.51 2-5-2-7-2"></path>
+                        </svg>
+                        Source
+                    </a>
+                </div>
+                <div class="hero-meta" aria-label="Ferrite highlights">
+                    <span class="meta-chip">per-device routing</span>
+                    <span class="meta-chip">WireGuard · SOCKS5 · Tor</span>
+                    <span class="meta-chip">DPI evasion</span>
+                    <span class="meta-chip">no root · single binary</span>
+                </div>
+            </div>
+
+            <div class="terminal ticks" aria-hidden="true">
+                <div class="terminal-head">
+                    <div class="terminal-dots">
+                        <span></span><span></span><span></span>
+                    </div>
+                    <span>ferrite — query log</span>
+                </div>
+                <div class="terminal-body">
+                    <div class="tline">
+                        <span class="ts">12:00:01</span
+                        ><span class="st-up">UPSTREAM</span>
+                        <span class="domain">api.github.com</span
+                        ><span class="lat">4ms</span>
+                    </div>
+                    <div class="tline blocked">
+                        <span class="ts">12:00:01</span
+                        ><span class="st-block">BLOCKED</span>
+                        <span class="domain">ads.doubleclick.net</span
+                        ><span class="lat">0ms</span>
+                    </div>
+                    <div class="tline">
+                        <span class="ts">12:00:02</span
+                        ><span class="st-cache">CACHED</span>
+                        <span class="domain">cloudflare-dns.com</span
+                        ><span class="lat">&lt;1ms</span>
+                    </div>
+                    <div class="tline blocked">
+                        <span class="ts">12:00:02</span
+                        ><span class="st-block">BLOCKED</span>
+                        <span class="domain">telemetry.vendor.io</span
+                        ><span class="lat">0ms</span>
+                    </div>
+                    <div class="tline">
+                        <span class="ts">12:00:03</span
+                        ><span class="st-cache">CACHED</span>
+                        <span class="domain">router.home.lan</span
+                        ><span class="lat">&lt;1ms</span>
+                    </div>
+                    <div class="tline blocked">
+                        <span class="ts">12:00:03</span
+                        ><span class="st-block">BLOCKED</span>
+                        <span class="domain">pixel.adsafeprotected.com</span
+                        ><span class="lat">0ms</span>
+                    </div>
+                    <div class="tline">
+                        <span class="ts">12:00:04</span
+                        ><span class="st-up">UPSTREAM</span>
+                        <span class="domain">crates.io</span
+                        ><span class="lat">6ms</span>
+                    </div>
+                    <div class="tline blocked">
+                        <span class="ts">12:00:04</span
+                        ><span class="st-block">BLOCKED</span>
+                        <span class="domain">metrics.icloud.com</span
+                        ><span class="lat">0ms</span>
+                    </div>
+                    <div class="tline">
+                        <span class="ts">12:00:05</span
+                        ><span class="st-cache">CACHED</span>
+                        <span class="domain">fe.te</span
+                        ><span class="lat">&lt;1ms</span>
+                    </div>
+                    <span class="terminal-cursor"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="burn-strip" aria-hidden="true">
+        <div class="burn-track">
+            <span><s>ads.doubleclick.net</s></span
+            ><span><s>graph.facebook.com</s></span
+            ><span><s>telemetry.mozilla.org</s></span
+            ><span><b>9,381 blocked today</b></span
+            ><span><s>pixel.adsafeprotected.com</s></span
+            ><span><s>stats.g.doubleclick.net</s></span
+            ><span><s>metrics.icloud.com</s></span
+            ><span><s>adservice.google.com</s></span
+            ><span><b>fe.te · control plane online</b></span>
+        </div>
+    </div>
+
+    <section class="metric-strip" aria-label="Product metrics">
+        <div class="metric">
+            <strong>30k+</strong><span>queries/sec sustained, zero loss</span>
+        </div>
+        <div class="metric">
+            <strong>&lt;2ms</strong
+            ><span>cache-hit &amp; blocklist decision</span>
+        </div>
+        <div class="metric">
+            <strong>0</strong><span>root needed — userspace WireGuard</span>
+        </div>
+        <div class="metric">
+            <strong>1</strong><span>binary: DNS, filtering, tunnels, UI</span>
+        </div>
+    </section>
+
+    <section class="band" id="features">
+        <div class="wrap">
+            <div class="section-head">
+                <p class="eyebrow">Network control</p>
+                <h2 class="display">Fast under real household traffic</h2>
+                <p class="lead">
+                    Ferrite keeps the hot path small: cached decisions, compiled
+                    blocklists, direct custom records, and per-device routing
+                    through a tunnel when a request should leave your network
+                    privately.
+                </p>
+            </div>
+            <div class="feature-grid">
+                <article
+                    class="feature ticks"
+                    style="--feature-color: var(--ember)"
+                >
+                    <div class="feature-icon" aria-hidden="true">
+                        <svg
+                            width="20"
+                            height="20"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2.1"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <path d="M4 12a8 8 0 0 1 16 0"></path>
+                            <path d="M12 4v8l4 2"></path>
+                            <path d="M5 19h14"></path>
+                        </svg>
+                    </div>
+                    <h3>Fast DNS cache</h3>
+                    <p>
+                        TTL-clamped LRU caching returns repeat lookups
+                        immediately and restores warm state after restart.
+                    </p>
+                </article>
+                <article
+                    class="feature ticks"
+                    style="--feature-color: var(--blocked)"
+                >
+                    <div class="feature-icon" aria-hidden="true">
+                        <svg
+                            width="20"
+                            height="20"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2.1"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <path
+                                d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"
+                            ></path>
+                            <path d="m4.9 4.9 14.2 14.2"></path>
+                        </svg>
+                    </div>
+                    <h3>Smart blocklists</h3>
+                    <p>
+                        Hosts files, Adblock rules, plain domain lists,
+                        wildcards, whitelist, and blacklist controls merge into
+                        one fast lookup layer.
+                    </p>
+                </article>
+                <article
+                    class="feature ticks"
+                    style="--feature-color: var(--upstream)"
+                >
+                    <div class="feature-icon" aria-hidden="true">
+                        <svg
+                            width="20"
+                            height="20"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2.1"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <path
+                                d="M12 3a6 6 0 0 0-6 6v3H5a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5a2 2 0 0 0-2-2h-1V9a6 6 0 0 0-6-6Z"
+                            ></path>
+                            <path d="M8 12V9a4 4 0 0 1 8 0v3"></path>
+                        </svg>
+                    </div>
+                    <h3>Encrypted upstreams</h3>
+                    <p>
+                        Plain, DoH, DoT, and DoQ in one pool with failover — and
+                        your queries can ride the tunnel, with client subnet
+                        stripped and DNSSEC requested.
+                    </p>
+                </article>
+                <article
+                    class="feature ticks"
+                    style="--feature-color: var(--warn)"
+                >
+                    <div class="feature-icon" aria-hidden="true">
+                        <svg
+                            width="20"
+                            height="20"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2.1"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <path d="M12 3v18"></path>
+                            <path d="M3 12h18"></path>
+                            <path d="M5 5l14 14"></path>
+                            <path d="M19 5 5 19"></path>
+                        </svg>
+                    </div>
+                    <h3>Custom DNS</h3>
+                    <p>
+                        Local A, AAAA, and CNAME records support exact and
+                        wildcard domains, so internal services get clean names.
+                    </p>
+                </article>
+                <article
+                    class="feature ticks"
+                    style="--feature-color: var(--cached)"
+                >
+                    <div class="feature-icon" aria-hidden="true">
+                        <svg
+                            width="20"
+                            height="20"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2.1"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <path d="M3 3v18h18"></path>
+                            <path d="m19 9-5 5-4-4-3 3"></path>
+                        </svg>
+                    </div>
+                    <h3>Live stats</h3>
+                    <p>
+                        The dashboard summary is served from memory, safe to
+                        poll frequently, and includes counters, recent activity,
+                        and timeseries data.
+                    </p>
+                </article>
+                <article
+                    class="feature ticks"
+                    style="--feature-color: var(--upstream)"
+                >
+                    <div class="feature-icon" aria-hidden="true">
+                        <svg
+                            width="20"
+                            height="20"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2.1"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <path d="M4 7h16"></path>
+                            <path d="M4 12h16"></path>
+                            <path d="M4 17h16"></path>
+                            <path d="M7 7v10"></path>
+                            <path d="M17 7v10"></path>
+                        </svg>
+                    </div>
+                    <h3>REST-managed runtime</h3>
+                    <p>
+                        Settings, lists, custom records, auth, client aliases,
+                        updates, and query history are managed through the API
+                        without restarting the resolver.
+                    </p>
+                </article>
+                <article
+                    class="feature ticks"
+                    style="--feature-color: var(--ember)"
+                >
+                    <div class="feature-icon" aria-hidden="true">
+                        <svg
+                            width="20"
+                            height="20"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2.1"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <circle cx="6" cy="6" r="2.4"></circle>
+                            <circle cx="6" cy="18" r="2.4"></circle>
+                            <circle cx="18" cy="12" r="2.4"></circle>
+                            <path d="M8.4 6H14a2 2 0 0 1 2 2v1.6"></path>
+                            <path d="M8.4 18H14a2 2 0 0 0 2-2v-1.6"></path>
+                        </svg>
+                    </div>
+                    <h3>Selective per-device routing</h3>
+                    <p>
+                        Send a domain — or a whole device, chosen by client name
+                        — through a tunnel. Everything else resolves direct, at
+                        full speed.
+                    </p>
+                </article>
+                <article
+                    class="feature ticks"
+                    style="--feature-color: var(--upstream)"
+                >
+                    <div class="feature-icon" aria-hidden="true">
+                        <svg
+                            width="20"
+                            height="20"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2.1"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <path
+                                d="M12 3 4 6v5c0 5 3.5 8 8 10 4.5-2 8-5 8-10V6Z"
+                            ></path>
+                            <path d="m9 12 2 2 4-4"></path>
+                        </svg>
+                    </div>
+                    <h3>Built-in tunnels</h3>
+                    <p>
+                        WireGuard, SOCKS5, and Tor egress live in the resolver
+                        itself. Userspace WireGuard — no TUN device, no root,
+                        fully in-process.
+                    </p>
+                </article>
+                <article
+                    class="feature ticks"
+                    style="--feature-color: var(--warn)"
+                >
+                    <div class="feature-icon" aria-hidden="true">
+                        <svg
+                            width="20"
+                            height="20"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2.1"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <circle cx="6" cy="6" r="2.5"></circle>
+                            <circle cx="6" cy="18" r="2.5"></circle>
+                            <path d="M8.1 7.5 20 18"></path>
+                            <path d="M8.1 16.5 20 6"></path>
+                        </svg>
+                    </div>
+                    <h3>DPI evasion</h3>
+                    <p>
+                        Split the TLS ClientHello at the SNI across TCP
+                        segments, so middleboxes that match on hostname never
+                        see the whole name.
+                    </p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="band alt" id="runtime">
+        <div class="wrap runtime">
+            <div>
+                <p class="eyebrow">Resolver pipeline</p>
+                <h2 class="display">The shortest useful path</h2>
+                <p class="lead">
+                    Ferrite resolves local records first, routes the domains you
+                    choose through a tunnel, blocks known bad traffic, serves
+                    from cache, and only then forwards to encrypted upstreams.
+                    That keeps the network calm and the UI honest.
+                </p>
+                <div
+                    class="protocol-grid"
+                    aria-label="Supported upstream protocols"
+                >
+                    <div class="protocol">
+                        <strong>Plain</strong><span>UDP/TCP port 53</span>
+                    </div>
+                    <div class="protocol">
+                        <strong>DoH</strong><span>DNS over HTTPS</span>
+                    </div>
+                    <div class="protocol">
+                        <strong>DoT</strong><span>DNS over TLS</span>
+                    </div>
+                    <div class="protocol">
+                        <strong>DoQ</strong><span>DNS over QUIC</span>
+                    </div>
+                </div>
+            </div>
+            <div class="flow" aria-label="DNS query flow">
+                <div class="flow-step">
+                    <span class="num">01</span>
+                    <div>
+                        <strong>Client asks Ferrite</strong>
+                        <span
+                            >Phones, laptops, TVs, containers, and servers point
+                            DNS at one local resolver.</span
+                        >
+                    </div>
+                    <code>53/udp</code>
+                </div>
+                <div class="flow-step">
+                    <span class="num">02</span>
+                    <div>
+                        <strong>Cache and local records answer first</strong>
+                        <span
+                            >Hot domains and custom internal names resolve
+                            before anything leaves the LAN.</span
+                        >
+                    </div>
+                    <code>&lt;1ms</code>
+                </div>
+                <div class="flow-step">
+                    <span class="num">03</span>
+                    <div>
+                        <strong>Blocklist policy decides</strong>
+                        <span
+                            >Compiled lists, wildcard rules, whitelist, and
+                            blacklist decide allowed vs blocked.</span
+                        >
+                    </div>
+                    <code>FST</code>
+                </div>
+                <div class="flow-step">
+                    <span class="num">04</span>
+                    <div>
+                        <strong>Upstream pool handles misses</strong>
+                        <span
+                            >DoH, DoT, DoQ, or plain resolvers are used with
+                            round-robin and failover.</span
+                        >
+                    </div>
+                    <code>TLS</code>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="band" id="dashboard">
+        <div class="wrap">
+            <div class="section-head">
+                <p class="eyebrow">Web UI</p>
+                <h2 class="display">Built for repeated use, not novelty</h2>
+                <p class="lead">
+                    The UI mirrors the resolver: dense, readable, and live.
+                    Watch query volume, blocked traffic, client activity, custom
+                    DNS, blocklists, and settings from the same place.
+                </p>
+            </div>
+            <div
+                class="dashboard-shell ticks"
+                aria-label="Ferrite dashboard preview"
+            >
+                <div class="dashboard-top">
+                    <div class="terminal-dots" aria-hidden="true">
+                        <span></span><span></span><span></span>
+                    </div>
+                    <code>http://fe.te</code>
+                </div>
+                <div class="dashboard-body">
+                    <aside class="sidebar" aria-hidden="true">
+                        <div class="side-item active">Dashboard</div>
+                        <div class="side-item">Query Log</div>
+                        <div class="side-item">Clients</div>
+                        <div class="side-item">Blocklist</div>
+                        <div class="side-item">Tunnels</div>
+                        <div class="side-item">Custom DNS</div>
+                        <div class="side-item">Tools</div>
+                        <div class="side-item">Settings</div>
+                    </aside>
+                    <div class="dash-main">
+                        <div class="stat">
+                            <small>Total queries</small><strong>14,523</strong>
+                        </div>
+                        <div class="stat" style="--stat-color: var(--blocked)">
+                            <small>Blocked</small><strong>3,210</strong>
+                        </div>
+                        <div class="stat" style="--stat-color: var(--cached)">
+                            <small>Cached</small><strong>6,700</strong>
+                        </div>
+                        <div class="dash-chart">
+                            <svg
+                                viewBox="0 0 760 130"
+                                preserveAspectRatio="none"
+                                aria-hidden="true"
+                            >
+                                <path
+                                    d="M0 111 L40 94 L80 102 L120 68 L160 76 L200 42 L240 52 L280 34 L320 44 L360 26 L400 58 L440 40 L480 72 L520 54 L560 82 L600 64 L640 92 L680 76 L720 94 L760 74 L760 130 L0 130 Z"
+                                    fill="rgba(255,106,56,0.13)"
+                                ></path>
+                                <path
+                                    d="M0 111 L40 94 L80 102 L120 68 L160 76 L200 42 L240 52 L280 34 L320 44 L360 26 L400 58 L440 40 L480 72 L520 54 L560 82 L600 64 L640 92 L680 76 L720 94 L760 74"
+                                    fill="none"
+                                    stroke="#ff6a38"
+                                    stroke-width="3"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                ></path>
+                                <path
+                                    d="M0 124 L40 118 L80 116 L120 98 L160 103 L200 86 L240 92 L280 72 L320 84 L360 66 L400 90 L440 78 L480 101 L520 83 L560 105 L600 96 L640 112 L680 102 L720 110 L760 98"
+                                    fill="none"
+                                    stroke="#ff5c5c"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    opacity="0.9"
+                                ></path>
+                            </svg>
+                        </div>
+                        <div class="live-list" aria-hidden="true">
+                            <div class="live-row">
+                                <span>12:00:01</span
+                                ><span class="q-up">upstream</span
+                                ><span>api.github.com</span><span>4ms</span>
+                            </div>
+                            <div class="live-row">
+                                <span>12:00:02</span
+                                ><span class="q-block">blocked</span
+                                ><span>ads.doubleclick.net</span
+                                ><span>0ms</span>
+                            </div>
+                            <div class="live-row">
+                                <span>12:00:03</span
+                                ><span class="q-cache">cached</span
+                                ><span>router.home.lan</span
+                                ><span>&lt;1ms</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="band alt" id="install">
+        <div class="wrap install-grid">
+            <div>
+                <p class="eyebrow">Install</p>
+                <h2 class="display">
+                    One script, then point your network at it
+                </h2>
+                <p class="lead">
+                    The installer downloads the server and web UI release
+                    assets, prepares system paths, and sets up the service for
+                    systemd, OpenRC, or launchd where available. Prefer
+                    containers? Pull the image from GHCR instead.
+                </p>
+                <div class="commands">
+                    <div class="command ticks">
+                        <div class="command-head">
+                            <span>Linux / macOS release install</span>
+                            <button
+                                class="copy"
+                                data-copy="curl -fsSL https://raw.githubusercontent.com/syntlyx/ferrite-server/refs/heads/main/install.sh | sudo sh"
+                            >
+                                Copy
+                            </button>
+                        </div>
+                        <pre><code>curl -fsSL https://raw.githubusercontent.com/syntlyx/ferrite-server/refs/heads/main/install.sh | sudo sh</code></pre>
+                    </div>
+                    <div class="command">
+                        <div class="command-head">
+                            <span>Docker — ghcr.io</span>
+                            <button
+                                class="copy"
+                                data-copy="docker run -d --name ferrite \&#10;  --restart unless-stopped \&#10;  -p 53:53/tcp -p 53:53/udp \&#10;  -p 80:80/tcp \&#10;  -v ferrite-data:/var/lib/ferrite \&#10;  ghcr.io/syntlyx/ferrite-server:latest"
+                            >
+                                Copy
+                            </button>
+                        </div>
+                        <pre><code>docker run -d --name ferrite \
+  --restart unless-stopped \
+  -p 53:53/tcp -p 53:53/udp \
+  -p 80:80/tcp \
+  -v ferrite-data:/var/lib/ferrite \
+  ghcr.io/syntlyx/ferrite-server:latest</code></pre>
+                    </div>
+                    <div class="command">
+                        <div class="command-head">
+                            <span>Build from source</span>
+                            <button
+                                class="copy"
+                                data-copy="cargo build --release&#10;sudo cp target/release/ferrite /usr/local/bin/ferrite"
+                            >
+                                Copy
+                            </button>
+                        </div>
+                        <pre><code>cargo build --release
+sudo cp target/release/ferrite /usr/local/bin/ferrite</code></pre>
+                    </div>
+                    <div class="command">
+                        <div class="command-head">
+                            <span>Set a web UI password</span>
+                            <button class="copy" data-copy="ferrite passwd">
+                                Copy
+                            </button>
+                        </div>
+                        <pre><code>ferrite passwd</code></pre>
+                    </div>
+                </div>
+            </div>
+            <div class="notes">
+                <div class="note">
+                    <strong>Default panel shortcut</strong>
+                    <p>
+                        Ferrite serves a built-in
+                        <code>fe.te</code> record that points to the detected
+                        local server address, so the panel is easy to find on
+                        the LAN.
+                    </p>
+                </div>
+                <div class="note">
+                    <strong>Container image on GHCR</strong>
+                    <p>
+                        A small Alpine image is published to
+                        <code>ghcr.io/syntlyx/ferrite-server</code>. Mount
+                        <code>/var/lib/ferrite</code> so config, data, and
+                        updates survive restarts — an Unraid Community Apps
+                        template is available too.
+                    </p>
+                </div>
+                <div class="note">
+                    <strong>Config stays small</strong>
+                    <p>
+                        User config lives at
+                        <code>~/.config/ferrite/config.toml</code>; system-wide
+                        config lives at <code>/etc/ferrite/config.toml</code>.
+                    </p>
+                </div>
+                <div class="note">
+                    <strong>UI updates are runtime-managed</strong>
+                    <p>
+                        The web UI can be updated through
+                        <code>POST /api/update/web</code> once Ferrite is
+                        running.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

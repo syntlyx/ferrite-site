@@ -1,0 +1,14 @@
+---
+import Base from "../layouts/Base.astro";
+import content from "../content/index.html?raw";
+import script from "../content/index.script.js?raw";
+---
+
+<Base
+    title="Ferrite — DNS filtering + per-device tunneling, forged in Rust"
+    description="Ferrite is a fast, self-hosted DNS resolver in Rust: ad/tracker blocking plus per-device routing through WireGuard, SOCKS5, or Tor with DPI evasion — filtering and a privacy tunnel in one no-root binary."
+    active="home"
+>
+    <Fragment set:html={content} />
+    <script is:inline set:html={script} />
+</Base>

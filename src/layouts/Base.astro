@@ -1,0 +1,142 @@
+---
+import "../styles/ferrite.css";
+
+interface Props {
+    title: string;
+    description?: string;
+    /** Which nav item is the current page (highlights it; `home` marks the logo). */
+    active?: "home" | "docs" | "api" | "download";
+}
+
+const { title, description, active } = Astro.props;
+const cur = (key: Props["active"]) => (active === key ? "page" : undefined);
+
+const FAVICON =
+    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='14' y1='10' x2='48' y2='54' gradientUnits='userSpaceOnUse'%3E%3Cstop stop-color='%23ffb27d'/%3E%3Cstop offset='.55' stop-color='%23ff6a38'/%3E%3Cstop offset='1' stop-color='%23e8481a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='%230b0907'/%3E%3Cpath d='M14 10h28l8 8v4H25v9h17v11H25v12H14Z' fill='url(%23g)'/%3E%3C/svg%3E";
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>{title}</title>
+        {description && <meta name="description" content={description} />}
+        <meta name="theme-color" content="#0b0907" />
+        <link rel="icon" href={FAVICON} />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+            rel="stylesheet"
+        />
+    </head>
+    <body>
+        <nav class="site-nav" aria-label="Primary navigation">
+            <div class="nav-inner">
+                <a
+                    class="brand display"
+                    href={active === "home" ? "#top" : "index.html"}
+                    aria-label="Ferrite home"
+                    aria-current={cur("home")}
+                >
+                    <span class="mark" aria-hidden="true">
+                        <svg
+                            viewBox="0 0 64 64"
+                            role="img"
+                            aria-label="Ferrite"
+                        >
+                            <defs>
+                                <linearGradient
+                                    id="nav-ember"
+                                    x1="16"
+                                    y1="13"
+                                    x2="46"
+                                    y2="51"
+                                    gradientUnits="userSpaceOnUse"
+                                >
+                                    <stop stop-color="#ffb27d"></stop>
+                                    <stop offset="0.55" stop-color="#ff6a38"
+                                    ></stop>
+                                    <stop offset="1" stop-color="#e8481a"
+                                    ></stop>
+                                </linearGradient>
+                            </defs>
+                            <rect width="64" height="64" rx="10" fill="#0b0907"
+                            ></rect>
+                            <path
+                                d="M16 13h24l6 6v3H25v8h15v9H25v12h-9Z"
+                                fill="url(#nav-ember)"></path>
+                            <rect
+                                x="40"
+                                y="45"
+                                width="6"
+                                height="6"
+                                fill="#ffc29e"></rect>
+                        </svg>
+                    </span>
+                    <span>ferrite</span>
+                </a>
+                <div class="nav-links">
+                    <a href="docs.html" aria-current={cur("docs")}>Docs</a>
+                    <a href="api.html" aria-current={cur("api")}>API</a>
+                    <a
+                        href="download.html"
+                        class="button button-primary button-mini"
+                        aria-current={cur("download")}>Download</a
+                    >
+                </div>
+            </div>
+        </nav>
+
+        <slot />
+
+        <footer>
+            <div class="footer-inner">
+                <a
+                    class="brand display"
+                    href="index.html"
+                    aria-label="Ferrite home"
+                >
+                    <span class="mark" aria-hidden="true">
+                        <svg viewBox="0 0 64 64" aria-hidden="true">
+                            <defs>
+                                <linearGradient
+                                    id="foot-ember"
+                                    x1="16"
+                                    y1="13"
+                                    x2="46"
+                                    y2="51"
+                                    gradientUnits="userSpaceOnUse"
+                                >
+                                    <stop stop-color="#ffb27d"></stop>
+                                    <stop offset="0.55" stop-color="#ff6a38"
+                                    ></stop>
+                                    <stop offset="1" stop-color="#e8481a"
+                                    ></stop>
+                                </linearGradient>
+                            </defs>
+                            <rect width="64" height="64" rx="10" fill="#0b0907"
+                            ></rect>
+                            <path
+                                d="M16 13h24l6 6v3H25v8h15v9H25v12h-9Z"
+                                fill="url(#foot-ember)"></path>
+                            <rect
+                                x="40"
+                                y="45"
+                                width="6"
+                                height="6"
+                                fill="#ffc29e"></rect>
+                        </svg>
+                    </span>
+                    <span>ferrite</span>
+                </a>
+                <span
+                    >Filtering + per-device tunnels for networks you actually
+                    control.</span
+                >
+                <a href="https://github.com/syntlyx/ferrite-server">Source</a>
+            </div>
+        </footer>
+    </body>
+</html>

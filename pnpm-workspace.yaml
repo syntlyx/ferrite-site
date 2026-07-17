@@ -1,0 +1,5 @@
+# Allow the native build scripts Astro's toolchain needs (esbuild binary, sharp
+# image library). pnpm blocks dependency build scripts by default.
+allowBuilds:
+  esbuild: true
+  sharp: true

@@ -1,0 +1,284 @@
+<main id="top">
+    <section class="band" id="quick-start">
+        <div class="wrap">
+            <div class="section-head">
+                <p class="eyebrow">Documentation</p>
+                <h1 class="display">Everything to run Ferrite</h1>
+                <p class="lead">
+                    One binary is the whole server: DNS, filtering, tunnels,
+                    REST API, and web UI. Install it, point your network at it,
+                    and manage the rest from the panel.
+                </p>
+            </div>
+
+            <div class="flow" aria-label="Quick start">
+                <div class="flow-step">
+                    <span class="num">01</span>
+                    <div>
+                        <strong>Install</strong>
+                        <span
+                            >One script for Linux/macOS, or a Docker image from
+                            GHCR.</span
+                        >
+                    </div>
+                    <code>install.sh</code>
+                </div>
+                <div class="flow-step">
+                    <span class="num">02</span>
+                    <div>
+                        <strong>Point your network at it</strong>
+                        <span
+                            >Set Ferrite as the DNS server on your router (DHCP)
+                            or per device.</span
+                        >
+                    </div>
+                    <code>53/udp</code>
+                </div>
+                <div class="flow-step">
+                    <span class="num">03</span>
+                    <div>
+                        <strong>Open the panel</strong>
+                        <span
+                            >Browse to <code>http://fe.te</code> on the LAN —
+                            set a password and go.</span
+                        >
+                    </div>
+                    <code>fe.te</code>
+                </div>
+            </div>
+            <p class="lead" style="margin-top: 1.5rem">
+                Full install commands (script, Docker, source) are on the
+                <a href="download.html">Download</a> page.
+            </p>
+        </div>
+    </section>
+
+    <section class="band alt" id="filtering">
+        <div class="wrap">
+            <div class="section-head">
+                <p class="eyebrow">Filtering</p>
+                <h2 class="display">Block ads, trackers, and worse</h2>
+                <p class="lead">
+                    Subscribe to any public list (StevenBlack, OISD, AdGuard,
+                    Hagezi…) by URL — they all merge into one fast lookup.
+                    Override per domain or per device.
+                </p>
+            </div>
+            <div class="notes">
+                <div class="note">
+                    <strong>Subscription lists</strong>
+                    <p>
+                        Add/enable/refresh any hosts-file, Adblock, or
+                        plain-domain list URL on the <em>Lists</em> page.
+                    </p>
+                </div>
+                <div class="note">
+                    <strong>Whitelist / blacklist / wildcards</strong>
+                    <p>
+                        Exact and <code>*.wildcard</code> rules, with a manual
+                        allow/deny that wins over lists.
+                    </p>
+                </div>
+                <div class="note">
+                    <strong>Per-client bypass</strong>
+                    <p>
+                        Let a specific device skip filtering entirely — matched
+                        by IP or MAC.
+                    </p>
+                </div>
+                <div class="note">
+                    <strong>Why-blocked check</strong>
+                    <p>
+                        Type a domain and see <em>which</em> list or rule
+                        matched, and the whitelist entry that exempts it.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="band" id="tunnels">
+        <div class="wrap">
+            <div class="section-head">
+                <p class="eyebrow">Selective routing · the wedge</p>
+                <h2 class="display">Route chosen domains through a tunnel</h2>
+                <p class="lead">
+                    This is what Ferrite adds over a plain ad-blocker. Define an
+                    <strong>egress</strong> (a tunnel), then a rule: a domain —
+                    or a whole device — resolves to Ferrite, which forwards the
+                    connection through that egress. Everything else stays
+                    direct.
+                </p>
+            </div>
+            <div class="notes">
+                <div class="note">
+                    <strong>Egress backends</strong>
+                    <p>
+                        <code>direct</code>, <code>socks5</code>,
+                        <code>wireguard</code> (paste a <code>.conf</code>), and
+                        <code>evasion</code>. Point a SOCKS5 egress at a local
+                        Tor (<code>127.0.0.1:9050</code>) to route over Tor.
+                    </p>
+                </div>
+                <div class="note">
+                    <strong>Userspace WireGuard</strong>
+                    <p>
+                        boringtun + smoltcp — no TUN device, no root, fully
+                        in-process. The tunnel stays warm; DNS for routed names
+                        resolves <em>through</em> it.
+                    </p>
+                </div>
+                <div class="note">
+                    <strong>Per-rule device scope</strong>
+                    <p>
+                        Apply a routing rule only to selected clients (picked by
+                        name from the query log). Empty = all devices.
+                    </p>
+                </div>
+                <div class="note">
+                    <strong>DPI evasion</strong>
+                    <p>
+                        The <code>evasion</code> egress splits the TLS
+                        ClientHello at the SNI across TCP segments — bytes
+                        unchanged, only segment boundaries move.
+                    </p>
+                </div>
+                <div class="note">
+                    <strong>Fail-closed</strong>
+                    <p>
+                        If a tunnel is down, a fail-closed rule drops the
+                        connection instead of leaking it direct. Toggle per
+                        rule.
+                    </p>
+                </div>
+                <div class="note">
+                    <strong>Wildcard or apex</strong>
+                    <p>
+                        A plain domain routes it and all subdomains;
+                        <code>*.example.com</code> routes subdomains only.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="band alt" id="upstreams">
+        <div class="wrap">
+            <div class="section-head">
+                <p class="eyebrow">Upstreams &amp; privacy</p>
+                <h2 class="display">
+                    Where misses go — and what leaks (nothing)
+                </h2>
+                <p class="lead">
+                    Cache misses leave through an upstream pool. Pick the
+                    protocol, send the query over a tunnel, and harden it so the
+                    resolver learns as little as possible.
+                </p>
+            </div>
+            <div class="protocol-grid" aria-label="Upstream protocols">
+                <div class="protocol">
+                    <strong>Plain</strong><span>UDP/TCP 53</span>
+                </div>
+                <div class="protocol">
+                    <strong>DoH</strong><span>DNS over HTTPS</span>
+                </div>
+                <div class="protocol">
+                    <strong>DoT</strong><span>DNS over TLS</span>
+                </div>
+                <div class="protocol">
+                    <strong>DoQ</strong><span>DNS over QUIC</span>
+                </div>
+            </div>
+            <div class="notes" style="margin-top: 1.5rem">
+                <div class="note">
+                    <strong>Through the tunnel</strong>
+                    <p>
+                        Send a resolver's queries (plain DNS-over-TCP or DoT)
+                        through an egress, with direct fallback when the tunnel
+                        is down — your ISP sees only WireGuard.
+                    </p>
+                </div>
+                <div class="note">
+                    <strong>No client-subnet leak</strong>
+                    <p>
+                        EDNS Client Subnet is stripped from outgoing queries, so
+                        the upstream never learns the client's subnet.
+                    </p>
+                </div>
+                <div class="note">
+                    <strong>DNSSEC requested</strong>
+                    <p>
+                        The DO bit is set and signatures are forwarded; pair
+                        with a validating resolver over DoT/DoH for end-to-end
+                        integrity.
+                    </p>
+                </div>
+                <div class="note">
+                    <strong>Zone routing</strong>
+                    <p>
+                        Send a suffix (e.g. your <code>.lan</code> or reverse
+                        zones) to a specific local resolver.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="band" id="more">
+        <div class="wrap">
+            <div class="section-head">
+                <p class="eyebrow">More</p>
+                <h2 class="display">Records, tools, and config</h2>
+            </div>
+            <div class="notes">
+                <div class="note">
+                    <strong>Custom DNS</strong>
+                    <p>
+                        Local A / AAAA / CNAME records for exact or wildcard
+                        names — clean names for internal services.
+                    </p>
+                </div>
+                <div class="note">
+                    <strong>Tools</strong>
+                    <p>
+                        Built-in <em>nslookup</em> (any record type, through
+                        your own upstreams) and <em>WHOIS</em>, plus the
+                        why-blocked check.
+                    </p>
+                </div>
+                <div class="note">
+                    <strong>Live stats &amp; query log</strong>
+                    <p>
+                        In-memory summary safe to poll, 24h timeseries, top
+                        domains/clients, and a filterable live log.
+                    </p>
+                </div>
+                <div class="note">
+                    <strong>Debug logging</strong>
+                    <p>
+                        A verbose-logging toggle (on by default) for diagnosing
+                        issues — flip it from Settings, no restart.
+                    </p>
+                </div>
+                <div class="note">
+                    <strong>Config file</strong>
+                    <p>
+                        User config: <code>~/.config/ferrite/config.toml</code>;
+                        system-wide: <code>/etc/ferrite/config.toml</code>. The
+                        server writes it — the UI is the primary editor,
+                        hand-editing is optional.
+                    </p>
+                </div>
+                <div class="note">
+                    <strong>Everything over REST</strong>
+                    <p>
+                        Settings, lists, records, rules, egresses, and history
+                        are all managed through the
+                        <a href="api.html">API</a> without restarting the
+                        resolver.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

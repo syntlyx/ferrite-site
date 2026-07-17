@@ -1,0 +1,11 @@
+{
+  // Cloudflare Workers static-assets config. `pnpm build` (astro build) outputs
+  // ./dist; Cloudflare serves it and uses 404.html for unmatched paths.
+  "name": "ferrite-website",
+  "compatibility_date": "2025-06-01",
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "404-page",
+    "html_handling": "auto-trailing-slash"
+  }
+}

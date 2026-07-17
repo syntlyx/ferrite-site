@@ -1,0 +1,331 @@
+<main id="top">
+    <section class="band">
+        <div class="wrap">
+            <div class="section-head">
+                <p class="eyebrow">REST API</p>
+                <h1 class="display">The same API the panel runs on</h1>
+                <p class="lead">
+                    Everything in the web UI is a call to this API, so anything
+                    you do by hand, a script can do too. JSON in, JSON out,
+                    served under <code>/api</code> on the panel port.
+                </p>
+            </div>
+            <div class="notes">
+                <div class="note">
+                    <strong>Auth</strong>
+                    <p>
+                        All <code>/api/*</code> routes require an API key
+                        (header <code>X-API-Key</code>) or a session cookie from
+                        <code>POST /api/auth</code>. Set the key in Settings.
+                        <code>/api/auth</code> itself is public.
+                    </p>
+                </div>
+                <div class="note">
+                    <strong>Hot vs restart</strong>
+                    <p>
+                        Most settings apply live; a few (bind addresses, cache
+                        sizes, upstreams, DNSSEC/ECS) are restart-required — the
+                        response says which.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="band alt">
+        <div class="wrap">
+            <div class="section-head">
+                <h2 class="display">Stats &amp; query log</h2>
+            </div>
+            <div class="notes">
+                <div class="note">
+                    <strong><code>GET</code> /api/stats/summary</strong>
+                    <p>
+                        Live counters (total / blocked / cached / upstream),
+                        from memory.
+                    </p>
+                </div>
+                <div class="note">
+                    <strong><code>GET</code> /api/stats/timeseries</strong>
+                    <p>24h, 10-minute buckets for the chart.</p>
+                </div>
+                <div class="note">
+                    <strong
+                        ><code>GET</code> /api/stats/top-domains · top-blocked ·
+                        top-clients</strong
+                    >
+                    <p>Ranked lists across retained history.</p>
+                </div>
+                <div class="note">
+                    <strong><code>GET</code> /api/stats/system</strong>
+                    <p>Process CPU, memory, network, disk, load.</p>
+                </div>
+                <div class="note">
+                    <strong><code>GET</code> /api/queries</strong>
+                    <p>
+                        Filterable query log (by client, status, domain, time).
+                    </p>
+                </div>
+                <div class="note">
+                    <strong><code>DELETE</code> /api/queries</strong>
+                    <p>Clear the stored query history.</p>
+                </div>
+                <div class="note">
+                    <strong><code>GET</code> /api/logs</strong>
+                    <p>
+                        Recent in-memory server log records (delta cursor + min
+                        level).
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="band">
+        <div class="wrap">
+            <div class="section-head"><h2 class="display">Clients</h2></div>
+            <div class="notes">
+                <div class="note">
+                    <strong><code>GET</code> /api/clients</strong>
+                    <p>
+                        Clients grouped by name, with their IPs and learned
+                        MACs.
+                    </p>
+                </div>
+                <div class="note">
+                    <strong><code>GET</code> /api/clients/{ip}/stats</strong>
+                    <p>Per-client counters.</p>
+                </div>
+                <div class="note">
+                    <strong
+                        ><code>GET · POST</code> /api/clients/aliases</strong
+                    >
+                    <p>List or set a manual name for an IP/MAC.</p>
+                </div>
+                <div class="note">
+                    <strong
+                        ><code>DELETE</code> /api/clients/aliases/{key}</strong
+                    >
+                    <p>Remove an alias.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="band alt">
+        <div class="wrap">
+            <div class="section-head"><h2 class="display">Filtering</h2></div>
+            <div class="notes">
+                <div class="note">
+                    <strong
+                        ><code>GET · POST</code> /api/blocklist/blacklist ·
+                        whitelist</strong
+                    >
+                    <p>List or add manual block/allow entries.</p>
+                </div>
+                <div class="note">
+                    <strong
+                        ><code>DELETE</code> /api/blocklist/blacklist/{domain} ·
+                        whitelist/{domain}</strong
+                    >
+                    <p>Remove an entry.</p>
+                </div>
+                <div class="note">
+                    <strong
+                        ><code>GET</code> /api/blocklist/check/{domain}</strong
+                    >
+                    <p>
+                        Why-blocked: the decision plus which list/rule matched
+                        and the exempting whitelist entry.
+                    </p>
+                </div>
+                <div class="note">
+                    <strong><code>GET · POST</code> /api/lists</strong>
+                    <p>List or add a subscription (URL + name).</p>
+                </div>
+                <div class="note">
+                    <strong
+                        ><code>PATCH · DELETE</code> /api/lists/{name}</strong
+                    >
+                    <p>Enable/disable or remove a list.</p>
+                </div>
+                <div class="note">
+                    <strong
+                        ><code>POST</code> /api/lists/refresh ·
+                        /api/lists/{name}/refresh</strong
+                    >
+                    <p>Re-fetch all, or one list.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="band">
+        <div class="wrap">
+            <div class="section-head">
+                <h2 class="display">DNS, tunnels &amp; tools</h2>
+            </div>
+            <div class="notes">
+                <div class="note">
+                    <strong><code>GET · POST</code> /api/custom-records</strong>
+                    <p>List or add a local A / AAAA / CNAME record.</p>
+                </div>
+                <div class="note">
+                    <strong
+                        ><code>DELETE</code>
+                        /api/custom-records/{domain}</strong
+                    >
+                    <p>Remove a record.</p>
+                </div>
+                <div class="note">
+                    <strong><code>GET · PUT</code> /api/proxy</strong>
+                    <p>
+                        Selective-routing config: egresses (tunnels) and rules.
+                        WireGuard private keys are masked on GET.
+                    </p>
+                </div>
+                <div class="note">
+                    <strong
+                        ><code>GET</code>
+                        /api/tools/resolve?name=&amp;type=</strong
+                    >
+                    <p>
+                        nslookup through your own upstreams (any record type).
+                    </p>
+                </div>
+                <div class="note">
+                    <strong><code>GET</code> /api/tools/whois?query=</strong>
+                    <p>WHOIS via IANA referral.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="band alt">
+        <div class="wrap">
+            <div class="section-head">
+                <h2 class="display">Monitoring</h2>
+                <p class="lead">
+                    A Prometheus endpoint for anyone who already runs a
+                    monitoring stack — the same counters the built-in dashboard
+                    reads, in text exposition format. There is a ready-made
+                    Grafana dashboard to go with it.
+                </p>
+            </div>
+            <div class="install-grid">
+                <div class="commands">
+                    <div class="command">
+                        <div class="command-head">
+                            <span>Quick check</span>
+                            <button
+                                class="copy"
+                                data-copy="curl -H 'X-Api-Key: YOUR_API_KEY' http://ferrite.lan/api/metrics"
+                            >
+                                Copy
+                            </button>
+                        </div>
+                        <pre><code>curl -H 'X-Api-Key: YOUR_API_KEY' http://ferrite.lan/api/metrics</code></pre>
+                    </div>
+                    <div class="command">
+                        <div class="command-head">
+                            <span>prometheus.yml — scrape config</span>
+                            <button
+                                class="copy"
+                                data-copy="scrape_configs:&#10;  - job_name: ferrite&#10;    metrics_path: /api/metrics&#10;    authorization:&#10;      credentials: YOUR_API_KEY&#10;    static_configs:&#10;      - targets: [&quot;ferrite.lan:80&quot;]"
+                            >
+                                Copy
+                            </button>
+                        </div>
+                        <pre
+                            class="noprompt"><code>scrape_configs:
+  - job_name: ferrite
+    metrics_path: /api/metrics
+    authorization:
+      credentials: YOUR_API_KEY
+    static_configs:
+      - targets: ["ferrite.lan:80"]</code></pre>
+                    </div>
+                    <div class="command">
+                        <div class="command-head">
+                            <span>Grafana dashboard</span>
+                            <a
+                                class="copy"
+                                href="/ferrite-grafana-dashboard.json"
+                                download>Download</a
+                            >
+                        </div>
+                        <pre
+                            class="noprompt"><code>Dashboards &rarr; New &rarr; Import &rarr; upload the JSON,
+then pick your Prometheus data source. Covers query
+rates, cache, egress health, probe RTT, throughput,
+rule hits, and process memory.</code></pre>
+                    </div>
+                </div>
+                <div class="notes">
+                    <div class="note">
+                        <strong><code>GET</code> /api/metrics</strong>
+                        <p>
+                            Prometheus text exposition (version 0.0.4). Same
+                            auth as the rest of the API: send the API key as
+                            <code>Authorization: Bearer</code> (Prometheus
+                            <code>authorization.credentials</code>) or an
+                            <code>X-Api-Key</code> header.
+                        </p>
+                    </div>
+                    <div class="note">
+                        <strong>What's exported</strong>
+                        <p>
+                            Query counters by outcome, cache and blocklist
+                            gauges, process memory and file descriptors, and
+                            per-egress health, probe RTT, traffic, failures,
+                            and per-rule hit counters. Per-domain tables are
+                            deliberately not exported — their label cardinality
+                            is unbounded; egress ids and rule patterns are
+                            config-bounded, so they are.
+                        </p>
+                    </div>
+                    <div class="note">
+                        <strong>Cheap to scrape</strong>
+                        <p>
+                            Every sample is read from counters the server
+                            already keeps — a scrape takes no locks on the DNS
+                            or proxy hot paths, so short intervals are fine.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="band">
+        <div class="wrap">
+            <div class="section-head">
+                <h2 class="display">Settings, auth &amp; updates</h2>
+            </div>
+            <div class="notes">
+                <div class="note">
+                    <strong><code>GET · PATCH</code> /api/settings</strong>
+                    <p>
+                        Read or patch config (secrets masked). Restart-required
+                        fields are flagged in the response.
+                    </p>
+                </div>
+                <div class="note">
+                    <strong><code>GET · POST · DELETE</code> /api/auth</strong>
+                    <p>Check session · log in (password) · log out.</p>
+                </div>
+                <div class="note">
+                    <strong><code>GET</code> /api/update/check</strong>
+                    <p>Cached check for newer server/web releases.</p>
+                </div>
+                <div class="note">
+                    <strong
+                        ><code>POST</code> /api/update/server ·
+                        /api/update/web</strong
+                    >
+                    <p>Pull and apply a release at runtime.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

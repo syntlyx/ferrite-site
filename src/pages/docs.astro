@@ -1,0 +1,12 @@
+---
+import Base from "../layouts/Base.astro";
+import content from "../content/docs.html?raw";
+---
+
+<Base
+    title="Docs — Ferrite"
+    description="How to run Ferrite: quick start, filtering, selective per-device routing through WireGuard/SOCKS5/Tor, encrypted upstreams, custom DNS, and diagnostic tools."
+    active="docs"
+>
+    <Fragment set:html={content} />
+</Base>
