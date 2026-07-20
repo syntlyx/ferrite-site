@@ -156,6 +156,23 @@
                     >
                     <p>Re-fetch all, or one list.</p>
                 </div>
+                <div class="note">
+                    <strong><code>GET · POST</code> /api/allowlists</strong>
+                    <p>
+                        Allowlist subscriptions — domains on them are never
+                        blocked. Mirrors /api/lists one-to-one
+                        (<code>PATCH · DELETE</code> /{name}, refresh).
+                    </p>
+                </div>
+                <div class="note">
+                    <strong
+                        ><code>GET · PUT</code> /api/blocklist/profiles</strong
+                    >
+                    <p>
+                        Per-device profiles: block/allow list subsets, manual
+                        overrides, and default-deny mode.
+                    </p>
+                </div>
             </div>
         </div>
     </section>
