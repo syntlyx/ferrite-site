@@ -125,7 +125,19 @@ sudo cp target/release/ferrite /usr/local/bin/ferrite</code></pre>
             </div>
             <div class="notes">
                 <div class="note">
-                    <strong>v0.1.6 — current</strong>
+                    <strong>v0.1.7 — current</strong>
+                    <p>
+                        Per-device blocklist profiles with manual block/allow
+                        overrides, subscribable allowlists, and a default-deny
+                        mode that exempts local names. Egress health gained
+                        active latency probes that gate fail-closed routing,
+                        down-alert webhooks, Prometheus metrics at
+                        <code>/api/metrics</code>, and per-tunnel traffic
+                        stats.
+                    </p>
+                </div>
+                <div class="note">
+                    <strong>v0.1.6</strong>
                     <p>
                         Memory overhaul — the mimalloc allocator, bounded
                         internal caches, and new memory-introspection stats keep
