@@ -88,10 +88,14 @@ sudo cp target/release/ferrite /usr/local/bin/ferrite</code></pre>
                 <div class="note">
                     <strong>No root for tunnels</strong>
                     <p>
-                        WireGuard egress runs in userspace (boringtun + smoltcp)
-                        — no TUN device and no <code>CAP_NET_ADMIN</code>.
-                        Privileged ports (53/80) just need the usual bind
-                        capability.
+                        Two WireGuard backends, picked automatically. Kernel mode
+                        gives multi-core crypto and line-rate throughput from a
+                        <code>CAP_NET_ADMIN</code> capability — still not root,
+                        and it never touches the host routing table. Where that
+                        capability or the kernel module is missing, the tunnel
+                        runs in userspace (boringtun + smoltcp) with no TUN
+                        device and no capability at all. Privileged ports (53/80)
+                        just need the usual bind capability.
                     </p>
                 </div>
                 <div class="note">
@@ -125,7 +129,23 @@ sudo cp target/release/ferrite /usr/local/bin/ferrite</code></pre>
             </div>
             <div class="notes">
                 <div class="note">
-                    <strong>v0.1.7 — current</strong>
+                    <strong>v0.1.8 — current</strong>
+                    <p>
+                        WireGuard tunnels can now run on the kernel backend:
+                        ferrite builds its own <code>wg</code> interface over
+                        netlink and steers only its own traffic through it, so
+                        crypto uses every core and throughput follows the link
+                        instead of a fixed window. Proxied bytes move with
+                        <code>splice(2)</code>, never entering user space.
+                        Blocking now wins over selective routing, so a
+                        blocklisted subdomain stays blocked under a routed
+                        domain, and a new client-TTL ceiling keeps devices thin
+                        so list, rule and profile changes reach them within a
+                        minute. The Linux download is ~20 MB instead of ~171.
+                    </p>
+                </div>
+                <div class="note">
+                    <strong>v0.1.7</strong>
                     <p>
                         Per-device blocklist profiles with manual block/allow
                         overrides, subscribable allowlists, and a default-deny

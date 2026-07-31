@@ -161,7 +161,7 @@
             ><span>cache-hit &amp; blocklist decision</span>
         </div>
         <div class="metric">
-            <strong>0</strong><span>root needed — userspace WireGuard</span>
+            <strong>0</strong><span>root needed — capabilities, not root</span>
         </div>
         <div class="metric">
             <strong>1</strong><span>binary: DNS, filtering, tunnels, UI</span>
@@ -398,8 +398,9 @@
                     <h3>Built-in tunnels</h3>
                     <p>
                         WireGuard, SOCKS5, and Tor egress live in the resolver
-                        itself. Userspace WireGuard — no TUN device, no root,
-                        fully in-process.
+                        itself. WireGuard runs kernel-backed for line-rate
+                        throughput, or fully in-process where that isn't
+                        available — no TUN device, no root either way.
                     </p>
                 </article>
                 <article

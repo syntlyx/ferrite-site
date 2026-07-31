@@ -138,11 +138,14 @@
                     </p>
                 </div>
                 <div class="note">
-                    <strong>Userspace WireGuard</strong>
+                    <strong>WireGuard, two backends</strong>
                     <p>
-                        boringtun + smoltcp — no TUN device, no root, fully
-                        in-process. The tunnel stays warm; DNS for routed names
-                        resolves <em>through</em> it.
+                        Kernel mode (a netlink-managed <code>wg</code> interface,
+                        multi-core crypto, no host routing changes) where the
+                        capability and module allow it; otherwise boringtun +
+                        smoltcp in-process — no TUN device, no root. Either way
+                        the tunnel stays warm and DNS for routed names resolves
+                        <em>through</em> it.
                     </p>
                 </div>
                 <div class="note">
