@@ -129,7 +129,27 @@ sudo cp target/release/ferrite /usr/local/bin/ferrite</code></pre>
             </div>
             <div class="notes">
                 <div class="note">
-                    <strong>v0.1.8 — current</strong>
+                    <strong>v0.1.9 — current</strong>
+                    <p>
+                        A lighter hot path: queries are read and patched on the
+                        wire instead of decoded and rebuilt, and on Linux UDP
+                        moves in batches — CPU per query drops from ~139 µs to
+                        ~19 µs. A blocklist refresh that changed nothing now
+                        builds nothing, a profile recompiles only when its own
+                        lists move, and the refresh peak on a million-domain
+                        list fell from 96 MB to 50 MB. The database now holds
+                        only what ferrite observed — everything you configure
+                        lives in <code>config.toml</code> — and you choose where
+                        it goes: SQLite at a path picked from the box's mounts,
+                        or a RAM-only backend, with a size cap and a 30-day
+                        default retention. The compiled blocklist can sit in RAM
+                        too, sparing an SD card. New switches stop query logging
+                        and statistics — including the device inventory —
+                        outright.
+                    </p>
+                </div>
+                <div class="note">
+                    <strong>v0.1.8</strong>
                     <p>
                         WireGuard tunnels can now run on the kernel backend:
                         ferrite builds its own <code>wg</code> interface over
